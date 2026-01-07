@@ -1,0 +1,8 @@
+{
+  "name": "Patient/Caregiver Version PRO Assessment Dashboard",
+  "description": "A responsive health and emotional assessment dashboard displaying scores, discrepant responses, and detailed question breakdowns for a child patient.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

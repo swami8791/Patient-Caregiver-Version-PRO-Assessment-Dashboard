@@ -1,0 +1,25 @@
+/* Global Styles */
+:root {
+  --font-inter: 'Inter', sans-serif;
+}
+
+body {
+  font-family: var(--font-inter);
+  background-color: #f3f4f6;
+  color: #111827;
+}
+
+/* Custom shadow for cards */
+.custom-shadow {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Smooth motion for framer-motion container height changes */
+.motion-container {
+  overflow: hidden;
+}
+
+/* Tap highlight removal for mobile */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
