@@ -22,3 +22,23 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# iOS
+ios/App/Pods
+ios/App/Podfile.lock
+ios/App/App/public
+*.xcuserstate
+*.xcworkspace/xcuserdata
+DerivedData
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Testing
+coverage
+.nyc_output
+*.lcov
+
+# Capacitor
+.capacitor
