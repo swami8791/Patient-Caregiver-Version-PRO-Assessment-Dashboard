@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { GoogleGenAI, Chat, GenerateContentResponse } from "@google/genai";
@@ -6,7 +5,8 @@ import {
   X, Send, Sparkles, Bot, User, ThumbsUp, ThumbsDown, 
   AlertCircle, TrendingUp, Info, CheckCircle2, ArrowRight, 
   ShieldAlert, Zap, MessageSquare, ChevronRight, BarChart3, 
-  LineChart as LineIcon, History, Smile, Meh, Frown, Heart
+  LineChart as LineIcon, History, Smile, Meh, Frown, Heart,
+  Trash2
 } from 'lucide-react';
 import { 
   ResponsiveContainer, 
@@ -47,6 +47,15 @@ interface Message {
   sentiment?: SentimentType;
   feedback?: 'up' | 'down';
 }
+
+const STORAGE_KEY = 'omni_chat_history';
+
+const DEFAULT_WELCOME_MESSAGE: Message = { 
+  id: 'welcome', 
+  role: 'model', 
+  text: `Safety Notice: This information is for informational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. --- Hello! I'm **Omni**. I've reviewed ${PROFILE_DATA.name}'s assessment history. \n\nI can visualize score trends for **Future Health**, **Coping & Adjustment**, and **Social-Emotional** well-being. How can I assist you today?`, 
+  sentiment: 'positive' 
+};
 
 const SUGGESTIONS = [
   "Show Future Health trend",
@@ -445,9 +454,20 @@ const MessageItem = React.memo<{ msg: Message; isLast: boolean }>(({ msg, isLast
 });
 
 export const ChatInterface: React.FC<ChatInterfaceProps> = ({ isOpen, onClose }) => {
-  const [messages, setMessages] = useState<Message[]>([
-      { id: 'welcome', role: 'model', text: `Safety Notice: This information is for informational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. --- Hello! I'm **Omni**. I've reviewed ${PROFILE_DATA.name}'s assessment history. \n\nI can visualize score trends for **Future Health**, **Coping & Adjustment**, and **Social-Emotional** well-being. How can I assist you today?`, sentiment: 'positive' }
-  ]);
+  // Initialize state from localStorage if available, otherwise use default welcome
+  const [messages, setMessages] = useState<Message[]>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch (e) {
+      console.warn('Failed to load chat history from localStorage', e);
+    }
+    return [DEFAULT_WELCOME_MESSAGE];
+  });
+
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -456,6 +476,15 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ isOpen, onClose })
   const scrollToBottom = useCallback((behavior: ScrollBehavior = "smooth") => {
     messagesEndRef.current?.scrollIntoView({ behavior });
   }, []);
+
+  // Persist messages to localStorage whenever they change
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+    } catch (e) {
+      console.warn('Failed to save chat history to localStorage', e);
+    }
+  }, [messages]);
 
   useEffect(() => { if (isOpen) scrollToBottom(isLoading ? "smooth" : "auto"); }, [isOpen, messages.length, isLoading, scrollToBottom]);
 
@@ -484,6 +513,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ isOpen, onClose })
           
           FORMAT: Start EVERY response with medical disclaimer then "---". 
           CONTEXT: ${JSON.stringify(contextData)}
+          HISTORY: Use the previous conversation history if relevant to provide continuity.
         `;
 
         chatSessionRef.current = ai.chats.create({
@@ -523,6 +553,13 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ isOpen, onClose })
     } finally { setIsLoading(false); }
   }, [inputValue, isLoading]);
 
+  const clearHistory = useCallback(() => {
+    if (window.confirm('Are you sure you want to clear your chat history?')) {
+      setMessages([DEFAULT_WELCOME_MESSAGE]);
+      localStorage.removeItem(STORAGE_KEY);
+    }
+  }, []);
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -530,10 +567,21 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({ isOpen, onClose })
           className="fixed inset-x-0 bottom-0 z-[60] h-[92vh] bg-white rounded-t-[48px] shadow-2xl flex flex-col overflow-hidden"
           initial={{ y: '100%' }} animate={{ y: 0 }} exit={{ y: '100%' }} transition={{ type: 'spring', damping: 30, stiffness: 200 }}
         >
-          <div className="w-full flex justify-center pt-5 pb-2 shrink-0"><div className="w-16 h-1.5 bg-zinc-200 rounded-full" /></div>
+          <div className="w-full flex justify-center pt-5 pb-2 shrink-0 relative">
+            <div className="w-16 h-1.5 bg-zinc-200 rounded-full" />
+          </div>
           <div className="px-8 pb-6 border-b border-zinc-100 flex justify-between items-center bg-white z-10 shrink-0">
             <div className="flex items-center gap-6"><OmniLogo /><h3 className="font-black text-zinc-950 text-2xl tracking-tighter">Omni Assistant</h3></div>
-            <button onClick={onClose} className="p-3 rounded-2xl text-zinc-300 hover:text-zinc-950 transition-all"><X size={28} /></button>
+            <div className="flex items-center gap-2">
+              <button 
+                onClick={clearHistory} 
+                className="p-3 rounded-2xl text-zinc-300 hover:text-rose-500 transition-all flex items-center gap-2"
+                title="Clear History"
+              >
+                <Trash2 size={20} />
+              </button>
+              <button onClick={onClose} className="p-3 rounded-2xl text-zinc-300 hover:text-zinc-950 transition-all"><X size={28} /></button>
+            </div>
           </div>
 
           <div className="flex-1 overflow-y-auto px-6 py-8 space-y-12 bg-zinc-50/50 no-scrollbar">

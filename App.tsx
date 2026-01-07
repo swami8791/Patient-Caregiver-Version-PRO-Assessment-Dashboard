@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { ProfileHeader } from './components/ProfileHeader';
 import { ScoreCard } from './components/ScoreCard';
@@ -7,7 +6,7 @@ import { QuestionCard } from './components/QuestionCard';
 import { DiscrepancyPopup } from './components/DiscrepancyPopup';
 import { ChatInterface } from './components/ChatInterface';
 import { OmniLogo } from './components/OmniLogo';
-import { ChevronDown, Sparkles } from 'lucide-react';
+import { ChevronDown, Sparkles, MessageSquare } from 'lucide-react';
 import { cn } from './lib/utils';
 import {
   PROFILE_DATA,
@@ -137,47 +136,50 @@ const App: React.FC = () => {
           </div>
         </div>
 
-        {/* Enhanced Slick Floating Action Button for Omni Assistant with Flowing Gradient */}
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 w-full max-w-md px-6 flex justify-center">
-          <motion.button
-            onClick={() => setIsChatOpen(true)}
-            className="group relative flex items-center gap-4 bg-gradient-to-br from-zinc-900 via-zinc-950 to-indigo-950 bg-[length:200%_200%] animate-gradient-slow text-white pl-4 pr-8 py-4 rounded-[28px] font-bold shadow-[0_20px_50px_rgba(79,70,229,0.3)] hover:shadow-indigo-500/50 transition-all border border-white/10 overflow-hidden"
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ 
-              y: 0, 
-              opacity: 1,
-              scale: [1, 1.02, 1]
-            }}
-            transition={{ 
-              y: { type: 'spring', damping: 15 },
-              scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
-            }}
+        {/* Fixed Floating Action Button (FAB) in the Bottom Right Corner */}
+        <div className="fixed bottom-8 right-8 z-[55] pointer-events-none">
+          <motion.div
+            className="pointer-events-auto flex flex-col items-end gap-3"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ type: 'spring', damping: 20, stiffness: 200, delay: 0.5 }}
           >
-            {/* Shimmer Effect Overlay */}
+            {/* Context Tooltip for User Awareness */}
             <motion.div 
-              className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-20deg] pointer-events-none"
-              animate={{ x: ['-200%', '200%'] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", repeatDelay: 1 }}
-            />
+              className="bg-zinc-900 text-white px-4 py-2 rounded-2xl shadow-xl text-xs font-bold border border-white/10"
+              initial={{ x: 20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 1.5 }}
+            >
+              Have questions? Ask Omni
+            </motion.div>
 
-            {/* Shared Logo Instance (Scaled down for button) */}
-            <div className="relative z-10">
-              <OmniLogo size="sm" />
-            </div>
+            <motion.button
+              onClick={() => setIsChatOpen(true)}
+              className="group relative flex items-center justify-center w-16 h-16 bg-gradient-to-br from-zinc-900 via-zinc-950 to-indigo-950 bg-[length:200%_200%] animate-gradient-slow text-white rounded-[24px] shadow-[0_15px_35px_rgba(79,70,229,0.3)] hover:shadow-indigo-500/50 transition-all border border-white/10 overflow-hidden"
+              whileHover={{ scale: 1.1, rotate: 5 }}
+              whileTap={{ scale: 0.9 }}
+              aria-label="Open Omni Assistant"
+            >
+              {/* Shimmer Effect Overlay */}
+              <motion.div 
+                className="absolute inset-0 z-0 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-20deg] pointer-events-none"
+                animate={{ x: ['-200%', '200%'] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", repeatDelay: 1 }}
+              />
 
-            <div className="relative z-10 flex flex-col items-start">
-              <span className="text-[14px] tracking-tight text-zinc-100 font-black leading-tight">Ask Omni Assistant</span>
-              <div className="flex items-center gap-1.5 opacity-60">
-                <Sparkles size={10} className="text-indigo-400" />
-                <span className="text-[9px] uppercase tracking-[0.2em] font-black">Powered by Gemini</span>
+              {/* Logo Instance */}
+              <div className="relative z-10">
+                <OmniLogo size="sm" />
               </div>
-            </div>
 
-            {/* Glow Aura */}
-            <div className="absolute inset-0 bg-indigo-500/5 group-hover:bg-indigo-500/10 transition-colors" />
-          </motion.button>
+              {/* Indicator Dot */}
+              <div className="absolute top-3 right-3 w-3 h-3 bg-indigo-500 rounded-full border-2 border-zinc-950 z-20 animate-pulse" />
+              
+              {/* Glow Aura */}
+              <div className="absolute inset-0 bg-indigo-500/5 group-hover:bg-indigo-500/10 transition-colors" />
+            </motion.button>
+          </motion.div>
         </div>
       </div>
     </div>
