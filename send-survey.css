@@ -1,0 +1,635 @@
+/* Send Survey - Mobile Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+  overflow-x: hidden;
+  padding-bottom: 80px;
+}
+
+/* Header */
+.header {
+  background-color: #fff;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.close-button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #f7fafc;
+  border: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #718096;
+}
+
+.header-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.header-action {
+  background: none;
+  border: none;
+  color: #4299e1;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem 0.75rem;
+}
+
+/* Progress Bar */
+.progress-container {
+  background-color: #fff;
+  padding: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 4px;
+  background-color: #e2e8f0;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 0.75rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #4299e1;
+  transition: width 0.3s ease;
+}
+
+.progress-steps {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+}
+
+.progress-step {
+  color: #a0aec0;
+  font-weight: 500;
+  flex: 1;
+  text-align: center;
+}
+
+.progress-step.active {
+  color: #4299e1;
+  font-weight: 600;
+}
+
+.progress-step.completed {
+  color: #48bb78;
+}
+
+/* Main Content */
+.main-content {
+  padding: 1rem;
+}
+
+.step-screen {
+  display: none;
+}
+
+.step-screen.active {
+  display: block;
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Search Container */
+.search-container {
+  margin-bottom: 1rem;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #4299e1;
+}
+
+.filter-chips {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.5rem;
+  scrollbar-width: none;
+}
+
+.filter-chips::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-chip {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  background-color: #fff;
+  color: #718096;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-chip.active {
+  background-color: #4299e1;
+  color: white;
+  border-color: #4299e1;
+}
+
+/* Bulk Select */
+.bulk-select {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  margin-bottom: 0.5rem;
+}
+
+.text-muted {
+  font-size: 0.875rem;
+  color: #718096;
+}
+
+/* Patient List */
+.patient-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.patient-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+}
+
+.patient-card:active {
+  transform: scale(0.98);
+}
+
+.patient-card.selected {
+  border-color: #4299e1;
+  background-color: #ebf8ff;
+}
+
+.patient-checkbox {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #cbd5e0;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: transparent;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.patient-card.selected .patient-checkbox {
+  background-color: #4299e1;
+  border-color: #4299e1;
+  color: white;
+}
+
+.patient-info {
+  flex: 1;
+}
+
+.patient-name {
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 0.25rem;
+}
+
+.patient-meta {
+  font-size: 0.875rem;
+  color: #718096;
+  margin-bottom: 0.25rem;
+}
+
+.patient-status {
+  font-size: 0.75rem;
+  color: #a0aec0;
+}
+
+/* Survey Type Cards */
+.survey-types {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.survey-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+}
+
+.survey-card:active {
+  transform: scale(0.98);
+}
+
+.survey-card.selected {
+  border-color: #4299e1;
+  background-color: #ebf8ff;
+}
+
+.survey-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 0.75rem;
+}
+
+.survey-card-title {
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: #2d3748;
+}
+
+.survey-radio {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #cbd5e0;
+  border-radius: 50%;
+  position: relative;
+  transition: all 0.2s;
+}
+
+.survey-card.selected .survey-radio {
+  border-color: #4299e1;
+  background-color: #4299e1;
+}
+
+.survey-card.selected .survey-radio::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.survey-card-description {
+  color: #4a5568;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.survey-card-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.75rem;
+  color: #718096;
+}
+
+/* Schedule Section */
+.schedule-section {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #2d3748;
+  margin-bottom: 1rem;
+}
+
+.schedule-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.schedule-option {
+  padding: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.schedule-option.selected {
+  border-color: #4299e1;
+  background-color: #ebf8ff;
+}
+
+.schedule-option-title {
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 0.25rem;
+}
+
+.schedule-option-description {
+  font-size: 0.875rem;
+  color: #718096;
+}
+
+.datetime-picker {
+  margin-top: 1rem;
+  display: none;
+}
+
+.datetime-picker.active {
+  display: block;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  display: block;
+  font-weight: 500;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #4299e1;
+}
+
+/* Review Section */
+.review-section {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.review-item {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.review-item:last-child {
+  border-bottom: none;
+}
+
+.review-label {
+  font-size: 0.75rem;
+  color: #718096;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.review-value {
+  color: #2d3748;
+  font-weight: 500;
+}
+
+.review-value-secondary {
+  font-size: 0.875rem;
+  color: #718096;
+  margin-top: 0.25rem;
+}
+
+.edit-button {
+  background: none;
+  border: none;
+  color: #4299e1;
+  font-size: 0.875rem;
+  cursor: pointer;
+  float: right;
+}
+
+/* Bottom Actions */
+.bottom-actions {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  padding: 1rem;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  gap: 0.75rem;
+  z-index: 100;
+}
+
+.btn {
+  flex: 1;
+  padding: 0.875rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.btn-secondary {
+  background-color: #f7fafc;
+  color: #4a5568;
+}
+
+.btn-secondary:active {
+  background-color: #e2e8f0;
+}
+
+.btn-primary {
+  background-color: #4299e1;
+  color: white;
+}
+
+.btn-primary:active {
+  background-color: #3182ce;
+}
+
+.btn-primary:disabled {
+  background-color: #cbd5e0;
+  cursor: not-allowed;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.loading-overlay.show {
+  display: flex;
+}
+
+.loading-spinner {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #e2e8f0;
+  border-top-color: #4299e1;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-spinner p {
+  color: #2d3748;
+  font-weight: 500;
+}
+
+/* Success Message */
+.success-screen {
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  background-color: #48bb78;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: white;
+  margin: 0 auto 1.5rem;
+}
+
+.success-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 0.75rem;
+}
+
+.success-description {
+  color: #718096;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+/* Reminder Section */
+.reminder-section {
+  background-color: #fffbeb;
+  border: 1px solid #fbbf24;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.reminder-title {
+  font-weight: 600;
+  color: #92400e;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.reminder-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
