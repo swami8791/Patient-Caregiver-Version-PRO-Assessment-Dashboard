@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Send Survey - RealTime Clinic</title>
+  <link rel="stylesheet" href="send-survey.css">
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <button class="close-button" onclick="cancelFlow()">×</button>
+      <h1 class="header-title">Send Survey</h1>
+    </div>
+    <button class="header-action" onclick="saveDraft()">Save Draft</button>
+  </header>
+
+  <!-- Progress Bar -->
+  <div class="progress-container">
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressBar" style="width: 25%"></div>
+    </div>
+    <div class="progress-steps">
+      <span class="progress-step active">Select Patients</span>
+      <span class="progress-step">Survey Type</span>
+      <span class="progress-step">Schedule</span>
+      <span class="progress-step">Review</span>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Step 1: Select Patients -->
+    <div class="step-screen active" id="step1">
+      <div class="search-container">
+        <input type="text" class="search-input" placeholder="Search patients...">
+        <div class="filter-chips">
+          <button class="filter-chip active">All Patients</button>
+          <button class="filter-chip">Due for Survey</button>
+          <button class="filter-chip">Post-Transplant</button>
+          <button class="filter-chip">High Risk</button>
+          <button class="filter-chip">Recent Visit</button>
+        </div>
+      </div>
+
+      <div class="bulk-select">
+        <span class="text-muted">3 patients selected</span>
+        <button style="color: #4299e1; background: none; border: none; cursor: pointer;" onclick="selectAllPatients()">Select All</button>
+      </div>
+
+      <div class="patient-list">
+        <div class="patient-card selected" onclick="togglePatient(this)" data-patient-id="patient-1">
+          <div class="patient-checkbox">✓</div>
+          <div class="patient-info">
+            <div class="patient-name">Johnny Davis</div>
+            <div class="patient-meta">12 yrs • 6mo post-transplant</div>
+            <div class="patient-status">Last survey: 1 month ago</div>
+          </div>
+        </div>
+
+        <div class="patient-card selected" onclick="togglePatient(this)" data-patient-id="patient-2">
+          <div class="patient-checkbox">✓</div>
+          <div class="patient-info">
+            <div class="patient-name">Emily Chen</div>
+            <div class="patient-meta">8 yrs • 2yr post-transplant</div>
+            <div class="patient-status">Last survey: 2 weeks ago</div>
+          </div>
+        </div>
+
+        <div class="patient-card selected" onclick="togglePatient(this)" data-patient-id="patient-3">
+          <div class="patient-checkbox">✓</div>
+          <div class="patient-info">
+            <div class="patient-name">Michael Torres</div>
+            <div class="patient-meta">15 yrs • 1yr post-transplant</div>
+            <div class="patient-status">Last survey: 3 months ago</div>
+          </div>
+        </div>
+
+        <div class="patient-card" onclick="togglePatient(this)" data-patient-id="patient-4">
+          <div class="patient-checkbox">✓</div>
+          <div class="patient-info">
+            <div class="patient-name">Sarah Johnson</div>
+            <div class="patient-meta">10 yrs • 3yr post-transplant</div>
+            <div class="patient-status">Last survey: 1 week ago</div>
+          </div>
+        </div>
+
+        <div class="patient-card" onclick="togglePatient(this)" data-patient-id="patient-5">
+          <div class="patient-checkbox">✓</div>
+          <div class="patient-info">
+            <div class="patient-name">David Martinez</div>
+            <div class="patient-meta">14 yrs • 6mo post-transplant</div>
+            <div class="patient-status">Last survey: 2 months ago</div>
+          </div>
+        </div>
+
+        <div class="patient-card" onclick="togglePatient(this)" data-patient-id="patient-6">
+          <div class="patient-checkbox">✓</div>
+          <div class="patient-info">
+            <div class="patient-name">Lisa Anderson</div>
+            <div class="patient-meta">9 yrs • 4yr post-transplant</div>
+            <div class="patient-status">Last survey: 1 month ago</div>
+          </div>
+        </div>
+
+        <div class="patient-card" onclick="togglePatient(this)" data-patient-id="patient-7">
+          <div class="patient-checkbox">✓</div>
+          <div class="patient-info">
+            <div class="patient-name">Ryan O'Brien</div>
+            <div class="patient-meta">13 yrs • 9mo post-transplant</div>
+            <div class="patient-status">Last survey: 3 weeks ago</div>
+          </div>
+        </div>
+
+        <div class="patient-card" onclick="togglePatient(this)" data-patient-id="patient-8">
+          <div class="patient-checkbox">✓</div>
+          <div class="patient-info">
+            <div class="patient-name">Amanda Wilson</div>
+            <div class="patient-meta">11 yrs • 5yr post-transplant</div>
+            <div class="patient-status">Last survey: 6 weeks ago</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 2: Survey Type -->
+    <div class="step-screen" id="step2">
+      <div class="survey-types">
+        <div class="survey-card selected" onclick="toggleSurveyType(this)" data-survey-type="peltql">
+          <div class="survey-card-header">
+            <h3 class="survey-card-title">PeLTQL Survey</h3>
+            <div class="survey-radio"></div>
+          </div>
+          <p class="survey-card-description">
+            Pediatric Liver Transplant Quality of Life assessment. Comprehensive evaluation of physical, emotional, and social well-being.
+          </p>
+          <div class="survey-card-meta">
+            <span>⏱️ ~15 min</span>
+            <span>📋 45 questions</span>
+            <span>👥 Parent + Child</span>
+          </div>
+        </div>
+
+        <div class="survey-card" onclick="toggleSurveyType(this)" data-survey-type="quick-check">
+          <div class="survey-card-header">
+            <h3 class="survey-card-title">Quick Check-In</h3>
+            <div class="survey-radio"></div>
+          </div>
+          <p class="survey-card-description">
+            Brief assessment for routine monitoring between comprehensive surveys. Focuses on key health indicators.
+          </p>
+          <div class="survey-card-meta">
+            <span>⏱️ ~5 min</span>
+            <span>📋 15 questions</span>
+            <span>👤 Parent or Child</span>
+          </div>
+        </div>
+
+        <div class="survey-card" onclick="toggleSurveyType(this)" data-survey-type="symptom-tracker">
+          <div class="survey-card-header">
+            <h3 class="survey-card-title">Symptom Tracker</h3>
+            <div class="survey-radio"></div>
+          </div>
+          <p class="survey-card-description">
+            Detailed symptom monitoring for patients experiencing specific concerns or side effects. Useful for clinical follow-up.
+          </p>
+          <div class="survey-card-meta">
+            <span>⏱️ ~10 min</span>
+            <span>📋 25 questions</span>
+            <span>👥 Parent + Child</span>
+          </div>
+        </div>
+
+        <div class="survey-card" onclick="toggleSurveyType(this)" data-survey-type="medication-adherence">
+          <div class="survey-card-header">
+            <h3 class="survey-card-title">Medication Adherence</h3>
+            <div class="survey-radio"></div>
+          </div>
+          <p class="survey-card-description">
+            Assess medication compliance and identify barriers to adherence. Includes reminder preferences and support needs.
+          </p>
+          <div class="survey-card-meta">
+            <span>⏱️ ~8 min</span>
+            <span>📋 20 questions</span>
+            <span>👥 Parent + Child</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 3: Schedule -->
+    <div class="step-screen" id="step3">
+      <div class="schedule-section">
+        <h3 class="section-title">When should the survey be sent?</h3>
+        <div class="schedule-options">
+          <div class="schedule-option selected" data-type="now">
+            <div class="schedule-option-title">Send Now</div>
+            <div class="schedule-option-description">Survey will be sent immediately to all selected patients</div>
+          </div>
+
+          <div class="schedule-option" data-type="scheduled">
+            <div class="schedule-option-title">Schedule for Later</div>
+            <div class="schedule-option-description">Choose a specific date and time to send the survey</div>
+          </div>
+        </div>
+
+        <div class="datetime-picker" id="datetimePicker">
+          <div class="form-group">
+            <label class="form-label">Date</label>
+            <input type="date" class="form-input" id="scheduleDate">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Time</label>
+            <input type="time" class="form-input" id="scheduleTime">
+          </div>
+        </div>
+      </div>
+
+      <div class="reminder-section">
+        <div class="reminder-title">⏰ Reminder Settings</div>
+        <div class="reminder-options">
+          <label class="checkbox-label">
+            <input type="checkbox" checked>
+            <span>Send reminder after 24 hours if not completed</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox" checked>
+            <span>Send reminder after 3 days if not completed</span>
+          </label>
+          <label class="checkbox-label">
+            <input type="checkbox">
+            <span>Notify care team when all responses received</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Step 4: Review -->
+    <div class="step-screen" id="step4">
+      <div class="review-section">
+        <h3 class="section-title">Review & Confirm</h3>
+
+        <div class="review-item">
+          <div class="review-label">Patients</div>
+          <button class="edit-button" onclick="editReviewSection(1)">Edit</button>
+          <div class="review-value" id="reviewPatients">3 patient(s) selected</div>
+          <div class="review-value-secondary">Johnny Davis, Emily Chen, Michael Torres</div>
+        </div>
+
+        <div class="review-item">
+          <div class="review-label">Survey Type</div>
+          <button class="edit-button" onclick="editReviewSection(2)">Edit</button>
+          <div class="review-value" id="reviewSurvey">PeLTQL Survey</div>
+          <div class="review-value-secondary">~15 min • 45 questions • Parent + Child</div>
+        </div>
+
+        <div class="review-item">
+          <div class="review-label">Schedule</div>
+          <button class="edit-button" onclick="editReviewSection(3)">Edit</button>
+          <div class="review-value" id="reviewSchedule">Send immediately</div>
+        </div>
+
+        <div class="review-item">
+          <div class="review-label">Reminders</div>
+          <button class="edit-button" onclick="editReviewSection(3)">Edit</button>
+          <div class="review-value">Enabled</div>
+          <div class="review-value-secondary">After 24 hours and 3 days</div>
+        </div>
+      </div>
+
+      <div class="schedule-section">
+        <h3 class="section-title">📧 Delivery Method</h3>
+        <p style="color: #718096; font-size: 0.875rem; margin-bottom: 1rem;">
+          Surveys will be sent via:
+        </p>
+        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; color: #2d3748;">
+            <span>✉️</span>
+            <span>Email (Primary)</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem; color: #2d3748;">
+            <span>📱</span>
+            <span>SMS notification (Backup)</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem; color: #2d3748;">
+            <span>🔔</span>
+            <span>Push notification (If app installed)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Bottom Actions -->
+  <div class="bottom-actions" id="bottomActions">
+    <button class="btn btn-secondary" onclick="previousStep()">Back</button>
+    <button class="btn btn-primary" onclick="nextStep()">
+      Continue
+      <span id="selectedCount">(3 selected)</span>
+    </button>
+  </div>
+
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner">
+      <div class="spinner"></div>
+      <p>Sending surveys...</p>
+    </div>
+  </div>
+
+  <script src="send-survey.js"></script>
+</body>
+
+</html>
