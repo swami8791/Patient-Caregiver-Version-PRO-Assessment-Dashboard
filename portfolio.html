@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Johnny Davis - RealTime Clinic Mobile</title>
+  <link rel="stylesheet" href="portfolio.css">
+</head>
+
+<body>
+  <!-- Mobile Header -->
+  <header class="mobile-header">
+    <div class="header-top">
+      <button class="back-button">←</button>
+      <div class="patient-header-mobile">
+        <div class="patient-name-mobile">Johnny Davis</div>
+        <div class="patient-meta-mobile">12 yrs • 6mo post-tx</div>
+      </div>
+      <button class="menu-button">⋯</button>
+    </div>
+
+    <!-- Alert Banner -->
+    <div class="alert-mobile">
+      <div class="alert-icon-mobile">!</div>
+      <div class="alert-content-mobile">
+        High discrepancy in Future Health (4.2). Schedule follow-up.
+      </div>
+    </div>
+
+    <!-- Score Summary -->
+    <div class="score-summary-mobile">
+      <div class="score-grid-mobile">
+        <div class="score-item-mobile">
+          <div class="score-label-mobile">Child Score</div>
+          <div class="score-value-mobile" style="color: #4299e1;">72.5</div>
+        </div>
+        <div class="score-item-mobile">
+          <div class="score-label-mobile">Parent Score</div>
+          <div class="score-value-mobile" style="color: #9f7aea;">68.3</div>
+        </div>
+      </div>
+      <div class="discrepancy-badge-mobile">
+        Discrepancy: 4.2 (High)
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs-mobile">
+      <div class="tab-mobile active">Overview</div>
+      <div class="tab-mobile">History</div>
+      <div class="tab-mobile">Notes</div>
+      <div class="tab-mobile">Documents</div>
+      <div class="tab-mobile">Team</div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="content-mobile">
+    <!-- Domain Cards -->
+    <div class="domain-cards-mobile">
+      <!-- Coping Adjustments -->
+      <div class="domain-card-mobile">
+        <div class="domain-header-mobile">
+          <div class="domain-title-mobile">Coping Adjustments</div>
+          <div class="domain-trend trend-up">↑ 2.1</div>
+        </div>
+        <div class="domain-scores-mobile">
+          <div class="domain-score-item">
+            <div class="domain-score-label">Child</div>
+            <div class="domain-score-value text-success">78.0</div>
+          </div>
+          <div class="domain-score-item">
+            <div class="domain-score-label">Parent</div>
+            <div class="domain-score-value text-success">75.5</div>
+          </div>
+        </div>
+        <div class="domain-discrepancy-mobile">
+          Gap: <span class="text-success">2.5</span> (Low)
+        </div>
+      </div>
+
+      <!-- Future Health -->
+      <div class="domain-card-mobile">
+        <div class="domain-header-mobile">
+          <div class="domain-title-mobile">Future Health</div>
+          <div class="domain-trend trend-down">↓ 5.3</div>
+        </div>
+        <div class="domain-scores-mobile">
+          <div class="domain-score-item">
+            <div class="domain-score-label">Child</div>
+            <div class="domain-score-value text-warning">65.0</div>
+          </div>
+          <div class="domain-score-item">
+            <div class="domain-score-label">Parent</div>
+            <div class="domain-score-value text-danger">52.0</div>
+          </div>
+        </div>
+        <div class="domain-discrepancy-mobile">
+          Gap: <span class="text-danger">13.0</span> (High)
+        </div>
+      </div>
+
+      <!-- Social Emotional -->
+      <div class="domain-card-mobile">
+        <div class="domain-header-mobile">
+          <div class="domain-title-mobile">Social Emotional</div>
+          <div class="domain-trend trend-up">↑ 1.0</div>
+        </div>
+        <div class="domain-scores-mobile">
+          <div class="domain-score-item">
+            <div class="domain-score-label">Child</div>
+            <div class="domain-score-value" style="color: #4299e1;">82.0</div>
+          </div>
+          <div class="domain-score-item">
+            <div class="domain-score-label">Parent</div>
+            <div class="domain-score-value" style="color: #4299e1;">79.0</div>
+          </div>
+        </div>
+        <div class="domain-discrepancy-mobile">
+          Gap: <span class="text-success">3.0</span> (Low)
+        </div>
+      </div>
+    </div>
+
+    <!-- Survey Timeline -->
+    <div class="section-header-mobile">
+      <h2 class="section-title-mobile">Recent Surveys</h2>
+      <button style="color: #4299e1; font-size: 0.875rem;">View All</button>
+    </div>
+
+    <div class="timeline-mobile">
+      <div class="timeline-item-mobile" onclick="showDetailSheet()">
+        <div class="timeline-status completed"></div>
+        <div class="timeline-title-mobile">PeLTQL Survey #5</div>
+        <div class="timeline-date-mobile">2 days ago</div>
+        <div class="timeline-scores-mobile">
+          <span>Overall: <strong>72.5</strong></span>
+          <span>Gap: <strong class="text-danger">4.2</strong></span>
+        </div>
+      </div>
+
+      <div class="timeline-item-mobile">
+        <div class="timeline-status completed"></div>
+        <div class="timeline-title-mobile">PeLTQL Survey #4</div>
+        <div class="timeline-date-mobile">1 month ago</div>
+        <div class="timeline-scores-mobile">
+          <span>Overall: <strong>75.7</strong></span>
+          <span>Gap: <strong class="text-success">2.1</strong></span>
+        </div>
+      </div>
+
+      <div class="timeline-item-mobile">
+        <div class="timeline-status pending"></div>
+        <div class="timeline-title-mobile">PeLTQL Survey #6</div>
+        <div class="timeline-date-mobile">Due in 5 days</div>
+        <button style="background-color: #4299e1; color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-size: 0.875rem; margin-top: 0.5rem;">Send Reminder</button>
+      </div>
+    </div>
+
+    <!-- Recent Notes -->
+    <div class="notes-mobile">
+      <div class="section-header-mobile">
+        <h3 class="section-title-mobile">Clinical Notes</h3>
+        <button style="color: #4299e1; font-size: 0.875rem;">Add</button>
+      </div>
+
+      <div class="note-mobile">
+        <div class="note-header-mobile">
+          <span class="note-author-mobile">Dr. Sarah Johnson</span>
+          <span class="note-date-mobile">2 days ago</span>
+        </div>
+        <p class="note-content-mobile">
+          Reviewed PeLTQL results. Significant Future Health discrepancy. Scheduled follow-up consultation.
+        </p>
+      </div>
+
+      <div class="note-mobile">
+        <div class="note-header-mobile">
+          <span class="note-author-mobile">Nurse Patricia Lee</span>
+          <span class="note-date-mobile">1 week ago</span>
+        </div>
+        <p class="note-content-mobile">
+          Patient in good spirits. Mother mentioned anxiety about school year.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Quick Actions FAB -->
+  <div class="quick-actions">
+    <button class="fab fab-secondary">📊</button>
+    <button class="fab">+</button>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <div class="nav-item">
+      <div class="nav-icon">🏠</div>
+      <span>Home</span>
+    </div>
+    <div class="nav-item active">
+      <div class="nav-icon">👥</div>
+      <span>Patients</span>
+    </div>
+    <div class="nav-item">
+      <div class="nav-icon">📋</div>
+      <span>Surveys</span>
+    </div>
+    <div class="nav-item">
+      <div class="nav-icon">📊</div>
+      <span>Reports</span>
+    </div>
+    <div class="nav-item">
+      <div class="nav-icon">⚙️</div>
+      <span>More</span>
+    </div>
+  </nav>
+
+  <!-- Detail Sheet Modal -->
+  <div class="overlay" id="overlay" onclick="hideDetailSheet()"></div>
+  <div class="detail-sheet" id="detailSheet">
+    <div class="sheet-handle"></div>
+    <div class="sheet-content">
+      <h3 class="sheet-title">Survey Details - June 23, 2025</h3>
+
+      <div class="response-item">
+        <div class="response-question">How often do you feel tired?</div>
+        <div class="response-values">
+          <span class="response-child">Child: Sometimes</span>
+          <span class="response-parent">Parent: Often</span>
+          <span class="response-gap">Gap: 2</span>
+        </div>
+      </div>
+
+      <div class="response-item">
+        <div class="response-question">Do you worry about your health in the future?</div>
+        <div class="response-values">
+          <span class="response-child">Child: Rarely</span>
+          <span class="response-parent">Parent: Very Often</span>
+          <span class="response-gap">Gap: 4</span>
+        </div>
+      </div>
+
+      <div class="response-item">
+        <div class="response-question">Can you keep up with other children your age?</div>
+        <div class="response-values">
+          <span class="response-child">Child: Always</span>
+          <span class="response-parent">Parent: Sometimes</span>
+          <span class="response-gap">Gap: 3</span>
+        </div>
+      </div>
+
+      <div class="response-item">
+        <div class="response-question">Do you feel different from other children?</div>
+        <div class="response-values">
+          <span class="response-child">Child: Never</span>
+          <span class="response-parent">Parent: Sometimes</span>
+          <span class="response-gap">Gap: 2</span>
+        </div>
+      </div>
+
+      <div style="background-color: #f7fafc; padding: 1rem; border-radius: 8px; margin-top: 1rem;">
+        <h4 style="margin-bottom: 0.5rem; color: #2d3748;">AI Insight</h4>
+        <p style="font-size: 0.875rem; color: #4a5568; line-height: 1.5;">
+          Child may be minimizing concerns while parent shows heightened anxiety. Common at 6-month mark. Consider separate counseling.
+        </p>
+      </div>
+
+      <button style="width: 100%; background-color: #4299e1; color: white; border: none; padding: 0.75rem; border-radius: 8px; font-weight: 500; margin-top: 1rem;">
+        View Full Report
+      </button>
+    </div>
+  </div>
+
+  <script src="portfolio.js"></script>
+</body>
+
+</html>
