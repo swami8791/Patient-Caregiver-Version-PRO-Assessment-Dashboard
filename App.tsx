@@ -6,6 +6,7 @@ import { QuestionCard } from './components/QuestionCard';
 import { DiscrepancyPopup } from './components/DiscrepancyPopup';
 import { ChatInterface } from './components/ChatInterface';
 import { OmniLogo } from './components/OmniLogo';
+import { IOSAppBanner } from './components/IOSAppButton';
 import { ChevronDown, Sparkles, MessageSquare } from 'lucide-react';
 import { cn } from './lib/utils';
 import {
@@ -44,12 +45,13 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center pb-32 font-['Inter']">
-      
+      <IOSAppBanner config={{ screen: 'dashboard' }} />
+
       <AnimatePresence>
         {selectedQuestion && (
-          <DiscrepancyPopup 
-            question={selectedQuestion} 
-            onClose={() => setSelectedDiscrepancyId(null)} 
+          <DiscrepancyPopup
+            question={selectedQuestion}
+            onClose={() => setSelectedDiscrepancyId(null)}
           />
         )}
       </AnimatePresence>

@@ -273,7 +273,19 @@
     </div>
   </div>
 
+  <script src="iosAppBridge.js"></script>
   <script src="portfolio.js"></script>
+  <script>
+    // Initialize iOS app banner if on iOS
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.IOSAppBridge && window.IOSAppBridge.isIOS()) {
+        window.IOSAppBridge.showIOSAppBanner({
+          screen: 'portfolio',
+          patientId: 'johnny-davis'
+        });
+      }
+    });
+  </script>
 </body>
 
 </html>

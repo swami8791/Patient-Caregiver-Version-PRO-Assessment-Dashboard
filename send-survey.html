@@ -311,7 +311,19 @@
     </div>
   </div>
 
+  <script src="iosAppBridge.js"></script>
   <script src="send-survey.js"></script>
+  <script>
+    // Initialize iOS app banner if on iOS
+    document.addEventListener('DOMContentLoaded', function() {
+      if (window.IOSAppBridge && window.IOSAppBridge.isIOS()) {
+        window.IOSAppBridge.showIOSAppBanner({
+          screen: 'survey',
+          action: 'send'
+        });
+      }
+    });
+  </script>
 </body>
 
 </html>
